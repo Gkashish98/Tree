@@ -1,5 +1,3 @@
-//find the minimum depth of binary tree
-
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -13,19 +11,24 @@
  */
 class Solution {
 public:
-    int minDepth(TreeNode* root) {
+    TreeNode* searchBST(TreeNode* root, int val) 
+    {
         if(root==NULL)
         {
-            return 0;
+            return NULL;
         }
-        if(root->left==NULL)
+        else if(root->val==val)
         {
-            return 1+minDepth(root->right);
+            return root;
         }
-        if(root->right==NULL)
+        else if(root->val>val)
         {
-            return 1+minDepth(root->left);
+            return searchBST(root->left,val);
         }
-        return 1+min(minDepth(root->left),minDepth(root->right));
+        else
+        {
+             return searchBST(root->right,val);
+        }
+        return root;
     }
 };
